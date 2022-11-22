@@ -40,22 +40,16 @@ namespace Shop.Pages
                     {
                         if (TxtPassword.Text == TxtRepeatPassword.Text)
                         {
-
-                            User NewUser = new User() { Name = TxtName.Text };
-
-                            if (CBRole.SelectedItem == "Admin") NewUser.Role = 2;
-                            else NewUser.Role = 1;
-
-                            App.Connection.User.Add(NewUser);
-                            App.Connection.SaveChanges();
-
-                            Authorization NewAuthorization = new Authorization()
+                            User NewUser = new User();
+                            Authorization NewLogin = new Authorization()
                             {
                                 Login = TxtLogin.Text,
-                                Password = TxtPassword.Text,
-                                User = App.Connection.User.Last().Id
+                                Password = TxtPassword.Text
                             };
-                            App.Connection.Authorization.Add(NewAuthorization);
+                            NewUser.Authorization.Add(NewLogin);
+                            NewUser.Name = TxtName.Text;
+                            NewUser.Role = 1;
+                            App.Connection.User.Add(NewUser);
                             App.Connection.SaveChanges();
 
                             NavigationService.GoBack();
