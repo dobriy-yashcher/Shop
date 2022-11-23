@@ -23,7 +23,8 @@ namespace Shop.Pages
     /// </summary>
     public partial class AdminPage : Page
     {
-        public byte[] ImageMat { get; set; }
+        private byte[] ImageItem { get; set; }
+        private byte[] ImageRecipe { get; set; }
 
         public AdminPage()
         {
@@ -32,20 +33,53 @@ namespace Shop.Pages
 
         private void SaveMaterialClick(object sender, RoutedEventArgs e)
         {
-            Item material = new Item
+            try
             {
-                Name = tbName.Text,
-                Image = ImageMat,
-                Count = Convert.ToInt32(tbCount.Text),
-                Cost = Convert.ToInt32(tbCost.Text)
-            };
+                Item material = new Item
+                {
+                    Name = tbName.Text,
+                    Image = ImageItem,
+                    Count = Convert.ToInt32(tbCount.Text),
+                    Cost = Convert.ToInt32(tbCost.Text)
+                };
 
-            App.Connection.Item.Add(material);
-            App.Connection.SaveChanges();
+                App.Connection.Item.Add(material);
+                App.Connection.SaveChanges();
+            }
+            catch { MessageBox.Show("Заполните поля!"); }
+        }
+        private void SaveRecipeClick(object sender, RoutedEventArgs e)
+        {
+            //try
+            //{
+            //    Item material = new Item
+            //    {
+            //        Name = tbName.Text,
+            //        Image = ImageItem,
+            //        Count = Convert.ToInt32(tbCount.Text),
+            //        Cost = Convert.ToInt32(tbCost.Text)
+            //    };
+
+            //    App.Connection.Item.Add(material);
+            //    App.Connection.SaveChanges();
+            //}
+            //catch { MessageBox.Show("Заполните поля!"); }
+
         }
 
-        private void ImageSelectionButtonClick(object sender, RoutedEventArgs e)
+        private void ImageItemSelectionButtonClick(object sender, RoutedEventArgs e)
         {
+            ImageItem = ImageSelect(sender);
+        }
+        private void ImageRecipeSelectionButtonClick(object sender, RoutedEventArgs e)
+        {
+            ImageRecipe = ImageSelect(sender);
+        }
+
+        private byte[] ImageSelect(object sender)
+        {
+            byte[] ImageMat = null;
+
             try
             {
                 var btnSelect = sender as Button;
@@ -55,11 +89,12 @@ namespace Shop.Pages
                     ImageMat = File.ReadAllBytes(dialog.FileName);
                     btnSelect.Background = Brushes.Green;
                 }
+
             }
-            catch
-            {
-                MessageBox.Show("Только фото!", "Ошибка");
-            }
+            catch { MessageBox.Show("Только фото!", "Ошибка"); }
+            
+            return ImageMat;
         }
+
     }
 }

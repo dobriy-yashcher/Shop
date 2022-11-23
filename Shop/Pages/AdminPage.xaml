@@ -9,15 +9,63 @@
       Title="AdminPage" Background="White">
 
     <Grid>
-        <StackPanel>
-            <TextBlock Text="Name"></TextBlock>
-            <TextBox x:Name="tbName"></TextBox>
-            <TextBlock Text="Count"></TextBlock>
-            <TextBox x:Name="tbCount"></TextBox>
-            <TextBlock Text="Cost"></TextBlock>
-            <TextBox x:Name="tbCost"></TextBox>
-            <Button x:Name="btnSelect" Content="Select" Click="ImageSelectionButtonClick"></Button>
-            <Button Content="Save" Click="SaveMaterialClick"></Button>
-        </StackPanel>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <TabControl x:Name="TabControl" Grid.RowSpan="2" Grid.ColumnSpan="2">
+            <TabItem x:Name="TbItAdd" Header="Add Item/Recipe">
+                <StackPanel Margin="5" Grid.Row="0">
+                    <TextBlock Text="Add new Item:"></TextBlock>
+                    <TextBlock />
+                    <TextBlock Text="Name"></TextBlock>
+                    <TextBox x:Name="tbName"></TextBox>
+                    <TextBlock Text="Count"></TextBlock>
+                    <TextBox x:Name="tbCount"></TextBox>
+                    <TextBlock Text="Cost"></TextBlock>
+                    <TextBox x:Name="tbCost"></TextBox>
+                    <Button x:Name="btnItemSelect" Content="Select Image" Margin="0 5" Click="ImageItemSelectionButtonClick"></Button>
+                    <Button Content="Save" Click="SaveMaterialClick"></Button>
+                    <TextBlock />
+                    <TextBlock />
+                    <!--<GridSplitter Grid.RowSpan="1" Background="Red" Height="15" Panel.ZIndex="10" VerticalAlignment="Bottom" IsEnabled="False"></GridSplitter>-->
+
+                    <TextBlock Margin="0 " Text="Add new Recipe:"></TextBlock>
+                    <TextBlock />
+
+                    <TextBlock Text="Name"></TextBlock>
+                    <TextBox x:Name="tbNameRecipe"></TextBox>
+
+                    <ScrollViewer>
+                        <StackPanel Grid.ColumnSpan="1">
+                            <TextBlock Text="Name"></TextBlock>
+                            <ListView>
+                                <ListView.ItemTemplate>
+                                    <DataTemplate>
+
+                                    </DataTemplate>
+                                </ListView.ItemTemplate>
+                            </ListView>
+                        </StackPanel>
+                    </ScrollViewer>
+
+                    <TextBlock Text="Add Item"></TextBlock>
+                    <ComboBox Margin="0 5 0 0"></ComboBox>
+
+                    <Button x:Name="btnRecipeSelect" Content="Select Image" Margin="0 5 0 0" Click="ImageRecipeSelectionButtonClick"></Button>
+                    <Button Content="Save" Margin="0 5 0 0" Click="SaveRecipeClick"></Button>
+                </StackPanel>
+            </TabItem>
+            <TabItem x:Name="TbItDish" Header="Dish">
+                <StackPanel Margin="5" Grid.Row="0">
+                </StackPanel>
+            </TabItem>
+        </TabControl>
+
     </Grid>
 </Page>
