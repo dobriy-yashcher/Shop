@@ -7,18 +7,18 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Shop
+namespace Shop.ADOApp
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class Buscket
+    public partial class Authorization
     {
         public int Id { get; set; }
+        public string Login { get; set; }
+        public string Password { get; set; }
         public int User { get; set; }
-        public int Item { get; set; }
     
-        public virtual Item Item1 { get; set; }
         public virtual User User1 { get; set; }
     }
 }

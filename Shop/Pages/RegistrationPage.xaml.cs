@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Shop.ADOApp;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -46,9 +47,11 @@ namespace Shop.Pages
                                 Login = TxtLogin.Text,
                                 Password = TxtPassword.Text
                             };
+
                             NewUser.Authorization.Add(NewLogin);
                             NewUser.Name = TxtName.Text;
-                            NewUser.Role = 1;
+                            NewUser.Role = CBRole.SelectedIndex + 1;
+
                             App.Connection.User.Add(NewUser);
                             App.Connection.SaveChanges();
 

@@ -7,18 +7,26 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Shop
+namespace Shop.ADOApp
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class Authorization
+    public partial class Item
     {
-        public int Id { get; set; }
-        public string Login { get; set; }
-        public string Password { get; set; }
-        public int User { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Item()
+        {
+            this.Buscket = new HashSet<Buscket>();
+        }
     
-        public virtual User User1 { get; set; }
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public int Cost { get; set; }
+        public byte[] Image { get; set; }
+        public int Count { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Buscket> Buscket { get; set; }
     }
 }

@@ -7,17 +7,18 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Shop
+namespace Shop.ADOApp
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class sysdiagrams
+    public partial class Buscket
     {
-        public string name { get; set; }
-        public int principal_id { get; set; }
-        public int diagram_id { get; set; }
-        public Nullable<int> version { get; set; }
-        public byte[] definition { get; set; }
+        public int Id { get; set; }
+        public int User { get; set; }
+        public int Item { get; set; }
+    
+        public virtual Item Item1 { get; set; }
+        public virtual User User1 { get; set; }
     }
 }

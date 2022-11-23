@@ -30,6 +30,7 @@
           <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="Cost" Type="int" Nullable="false" />
           <Property Name="Image" Type="image" Nullable="false" />
+          <Property Name="Count" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Role">
           <Key>
@@ -161,6 +162,7 @@
           <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Cost" Type="Int32" Nullable="false" />
           <Property Name="Image" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
+          <Property Name="Count" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Buscket" Relationship="Self.FK_Buscket_Item" FromRole="Item" ToRole="Buscket" />
         </EntityType>
         <EntityType Name="Role">
@@ -296,6 +298,7 @@
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Cost" ColumnName="Cost" />
                 <ScalarProperty Name="Image" ColumnName="Image" />
+                <ScalarProperty Name="Count" ColumnName="Count" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

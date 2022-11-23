@@ -10,9 +10,9 @@
 
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition></RowDefinition>
-            <RowDefinition Height="2*"></RowDefinition>
-            <RowDefinition></RowDefinition>
+            <RowDefinition Height="113*"></RowDefinition>
+            <RowDefinition Height="231*"></RowDefinition>
+            <RowDefinition Height="106*"></RowDefinition>
         </Grid.RowDefinitions>
 
         <Grid.ColumnDefinitions>
@@ -25,18 +25,18 @@
             <TextBox x:Name="TxtName"></TextBox>
             <TextBlock Text="Login"></TextBlock>
             <TextBox x:Name="TxtLogin"></TextBox>
-            
+
             <TextBlock Text="Password"></TextBlock>
             <TextBox x:Name="TxtPassword"></TextBox>
             <TextBlock Text="Repeat password"></TextBlock>
             <TextBox x:Name="TxtRepeatPassword"></TextBox>
-            
+
             <TextBlock Text="Select role"></TextBlock>
             <ComboBox x:Name="CBRole">
                 <ComboBoxItem Content="Client"/>
                 <ComboBoxItem Content="Admin"/>
             </ComboBox>
-            
+
             <StackPanel Margin="10" HorizontalAlignment="Center" Orientation="Horizontal">
                 <Button Content="Reverse" Click="ReverseButton_Click" Margin="5"></Button>
                 <Button Content="Registration" Click="RegistrationButton_Click"  Margin="5"></Button>

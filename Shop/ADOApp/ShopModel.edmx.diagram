@@ -4,10 +4,10 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="177befd6dfcd41bd9984904974eaffc5" Name="Diagram1">
+      <Diagram DiagramId="39da8e0d7f7d42c4bf794e266de10c47" Name="Diagram1">
         <EntityTypeShape EntityType="ShopPracticModel.Authorization" Width="1.5" PointX="5.25" PointY="3.75" IsExpanded="true" />
         <EntityTypeShape EntityType="ShopPracticModel.Buscket" Width="1.5" PointX="5.25" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="ShopPracticModel.Item" Width="1.5" PointX="3" PointY="7.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ShopPracticModel.Item" Width="1.5" PointX="3" PointY="6.625" IsExpanded="true" />
         <EntityTypeShape EntityType="ShopPracticModel.Role" Width="1.5" PointX="0.75" PointY="4" IsExpanded="true" />
         <EntityTypeShape EntityType="ShopPracticModel.sysdiagrams" Width="1.5" PointX="5.75" PointY="7.125" IsExpanded="true" />
         <EntityTypeShape EntityType="ShopPracticModel.User" Width="1.5" PointX="3" PointY="3.625" IsExpanded="true" />

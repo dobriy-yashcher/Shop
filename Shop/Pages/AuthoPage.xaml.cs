@@ -36,20 +36,21 @@ namespace Shop.Pages
             {
                 if ((TxtLogin.Text != "") && (TxtPassword.Password != ""))
                 {
-                    var DataLogin = App.Connection.Authorization.Where(z => z.Login == TxtLogin.Text && z.Password == TxtPassword.Password).FirstOrDefault();
+                    var DataLogin = App.Connection.Authorization.Where(z => z.Login == TxtLogin.Text 
+                                                        && z.Password == TxtPassword.Password).FirstOrDefault();
+
                     if (DataLogin != null)
                     {
-                        MessageBox.Show(App.Connection.User.Where(z => z.Id == DataLogin.User).FirstOrDefault().Name);
+                        if (App.Connection.User.Where(z => z.Id == DataLogin.User).FirstOrDefault().Role == 1) 
+                            NavigationService.Navigate(new UserPage(DataLogin));
+
+                        else NavigationService.Navigate(new AdminPage());
                     }
-                    else
-                    {
-                        MessageBox.Show("Неправильный логин или пароль");
-                    }
+
+                    else MessageBox.Show("Неправильный логин или пароль");
                 }
-                else
-                {
-                    MessageBox.Show("Заполните поля!");
-                }
+
+                else MessageBox.Show("Заполните поля!");
             }
             catch (Exception ex)
             {

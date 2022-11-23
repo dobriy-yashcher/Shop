@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Shop
+namespace Shop.ADOApp
 {
     using System;
     using System.Collections.Generic;
