@@ -4,16 +4,22 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="39da8e0d7f7d42c4bf794e266de10c47" Name="Diagram1">
+      <Diagram DiagramId="a4177bd3718a44348d23682b2166df32" Name="Diagram1">
         <EntityTypeShape EntityType="ShopPracticModel.Authorization" Width="1.5" PointX="5.25" PointY="3.75" IsExpanded="true" />
         <EntityTypeShape EntityType="ShopPracticModel.Buscket" Width="1.5" PointX="5.25" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="ShopPracticModel.Item" Width="1.5" PointX="3" PointY="6.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="ShopPracticModel.Dish" Width="1.5" PointX="8" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ShopPracticModel.Item" Width="1.5" PointX="3" PointY="6.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ShopPracticModel.Item_Recipe" Width="1.5" PointX="8" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ShopPracticModel.Recipe" Width="1.5" PointX="5.75" PointY="8.5" IsExpanded="true" />
         <EntityTypeShape EntityType="ShopPracticModel.Role" Width="1.5" PointX="0.75" PointY="4" IsExpanded="true" />
-        <EntityTypeShape EntityType="ShopPracticModel.sysdiagrams" Width="1.5" PointX="5.75" PointY="7.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ShopPracticModel.sysdiagrams" Width="1.5" PointX="7.75" PointY="2.125" IsExpanded="true" />
         <EntityTypeShape EntityType="ShopPracticModel.User" Width="1.5" PointX="3" PointY="3.625" IsExpanded="true" />
         <AssociationConnector Association="ShopPracticModel.FK_Authorization_User" ManuallyRouted="false" />
         <AssociationConnector Association="ShopPracticModel.FK_Buscket_Item" ManuallyRouted="false" />
         <AssociationConnector Association="ShopPracticModel.FK_Buscket_User" ManuallyRouted="false" />
+        <AssociationConnector Association="ShopPracticModel.FK_Dish_Recipe" ManuallyRouted="false" />
+        <AssociationConnector Association="ShopPracticModel.FK_Item_Recipe_Item" ManuallyRouted="false" />
+        <AssociationConnector Association="ShopPracticModel.FK_Item_Recipe_Recipe" ManuallyRouted="false" />
         <AssociationConnector Association="ShopPracticModel.FK_User_Role" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>

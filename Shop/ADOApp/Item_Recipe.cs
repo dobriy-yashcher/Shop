@@ -12,18 +12,13 @@ namespace Shop.ADOApp
     using System;
     using System.Collections.Generic;
     
-    public partial class Role
+    public partial class Item_Recipe
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Role()
-        {
-            this.User = new HashSet<User>();
-        }
-    
         public int Id { get; set; }
-        public string Name { get; set; }
+        public int Item { get; set; }
+        public int Recipe { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<User> User { get; set; }
+        public virtual Item Item1 { get; set; }
+        public virtual Recipe Recipe1 { get; set; }
     }
 }

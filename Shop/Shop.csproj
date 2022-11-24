@@ -70,7 +70,16 @@
     <Compile Include="ADOApp\Buscket.cs">
       <DependentUpon>ShopModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="ADOApp\Dish.cs">
+      <DependentUpon>ShopModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="ADOApp\Item.cs">
+      <DependentUpon>ShopModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ADOApp\Item_Recipe.cs">
+      <DependentUpon>ShopModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ADOApp\Recipe.cs">
       <DependentUpon>ShopModel.tt</DependentUpon>
     </Compile>
     <Compile Include="ADOApp\Role.cs">
@@ -97,6 +106,12 @@
     <Compile Include="ADOApp\User.cs">
       <DependentUpon>ShopModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Pages\AddItemPage.xaml.cs">
+      <DependentUpon>AddItemPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\AddRecipePage.xaml.cs">
+      <DependentUpon>AddRecipePage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\AdminPage.xaml.cs">
       <DependentUpon>AdminPage.xaml</DependentUpon>
     </Compile>
@@ -106,6 +121,14 @@
     <Compile Include="Pages\RegistrationPage.xaml.cs">
       <DependentUpon>RegistrationPage.xaml</DependentUpon>
     </Compile>
+    <Page Include="Pages\AddItemPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\AddRecipePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Pages\AdminPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

@@ -12,23 +12,21 @@ namespace Shop.ADOApp
     using System;
     using System.Collections.Generic;
     
-    public partial class Item
+    public partial class Recipe
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Item()
+        public Recipe()
         {
-            this.Buscket = new HashSet<Buscket>();
+            this.Dish = new HashSet<Dish>();
             this.Item_Recipe = new HashSet<Item_Recipe>();
         }
     
         public int Id { get; set; }
-        public string Name { get; set; }
-        public int Cost { get; set; }
         public byte[] Image { get; set; }
-        public int Count { get; set; }
+        public string Name { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Buscket> Buscket { get; set; }
+        public virtual ICollection<Dish> Dish { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Item_Recipe> Item_Recipe { get; set; }
     }

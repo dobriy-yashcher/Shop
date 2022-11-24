@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="Хранилище ShopPracticModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="ShopPracticModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Authorization">
           <Key>
             <PropertyRef Name="Id" />
@@ -22,6 +22,13 @@
           <Property Name="User" Type="int" Nullable="false" />
           <Property Name="Item" Type="int" Nullable="false" />
         </EntityType>
+        <EntityType Name="Dish">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Recipe" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="Item">
           <Key>
             <PropertyRef Name="Id" />
@@ -31,6 +38,22 @@
           <Property Name="Cost" Type="int" Nullable="false" />
           <Property Name="Image" Type="image" Nullable="false" />
           <Property Name="Count" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Item_Recipe">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Item" Type="int" Nullable="false" />
+          <Property Name="Recipe" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Recipe">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Image" Type="image" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="Role">
           <Key>
@@ -93,6 +116,42 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Dish_Recipe">
+          <End Role="Recipe" Type="Self.Recipe" Multiplicity="1" />
+          <End Role="Dish" Type="Self.Dish" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Recipe">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Dish">
+              <PropertyRef Name="Recipe" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Item_Recipe_Item">
+          <End Role="Item" Type="Self.Item" Multiplicity="1" />
+          <End Role="Item_Recipe" Type="Self.Item_Recipe" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Item">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Item_Recipe">
+              <PropertyRef Name="Item" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Item_Recipe_Recipe">
+          <End Role="Recipe" Type="Self.Recipe" Multiplicity="1" />
+          <End Role="Item_Recipe" Type="Self.Item_Recipe" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Recipe">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Item_Recipe">
+              <PropertyRef Name="Recipe" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_User_Role">
           <End Role="Role" Type="Self.Role" Multiplicity="1" />
           <End Role="User" Type="Self.User" Multiplicity="*" />
@@ -105,10 +164,13 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="Хранилище ShopPracticModelContainer">
+        <EntityContainer Name="ShopPracticModelStoreContainer">
           <EntitySet Name="Authorization" EntityType="Self.Authorization" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Buscket" EntityType="Self.Buscket" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Dish" EntityType="Self.Dish" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Item" EntityType="Self.Item" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Item_Recipe" EntityType="Self.Item_Recipe" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Recipe" EntityType="Self.Recipe" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Role" EntityType="Self.Role" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
@@ -123,6 +185,18 @@
           <AssociationSet Name="FK_Buscket_User" Association="Self.FK_Buscket_User">
             <End Role="User" EntitySet="User" />
             <End Role="Buscket" EntitySet="Buscket" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Dish_Recipe" Association="Self.FK_Dish_Recipe">
+            <End Role="Recipe" EntitySet="Recipe" />
+            <End Role="Dish" EntitySet="Dish" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Item_Recipe_Item" Association="Self.FK_Item_Recipe_Item">
+            <End Role="Item" EntitySet="Item" />
+            <End Role="Item_Recipe" EntitySet="Item_Recipe" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Item_Recipe_Recipe" Association="Self.FK_Item_Recipe_Recipe">
+            <End Role="Recipe" EntitySet="Recipe" />
+            <End Role="Item_Recipe" EntitySet="Item_Recipe" />
           </AssociationSet>
           <AssociationSet Name="FK_User_Role" Association="Self.FK_User_Role">
             <End Role="Role" EntitySet="Role" />
@@ -154,6 +228,14 @@
           <NavigationProperty Name="Item1" Relationship="Self.FK_Buscket_Item" FromRole="Buscket" ToRole="Item" />
           <NavigationProperty Name="User1" Relationship="Self.FK_Buscket_User" FromRole="Buscket" ToRole="User" />
         </EntityType>
+        <EntityType Name="Dish">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Recipe" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Recipe1" Relationship="Self.FK_Dish_Recipe" FromRole="Dish" ToRole="Recipe" />
+        </EntityType>
         <EntityType Name="Item">
           <Key>
             <PropertyRef Name="Id" />
@@ -164,6 +246,27 @@
           <Property Name="Image" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
           <Property Name="Count" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Buscket" Relationship="Self.FK_Buscket_Item" FromRole="Item" ToRole="Buscket" />
+          <NavigationProperty Name="Item_Recipe" Relationship="Self.FK_Item_Recipe_Item" FromRole="Item" ToRole="Item_Recipe" />
+        </EntityType>
+        <EntityType Name="Item_Recipe">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Item" Type="Int32" Nullable="false" />
+          <Property Name="Recipe" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Item1" Relationship="Self.FK_Item_Recipe_Item" FromRole="Item_Recipe" ToRole="Item" />
+          <NavigationProperty Name="Recipe1" Relationship="Self.FK_Item_Recipe_Recipe" FromRole="Item_Recipe" ToRole="Recipe" />
+        </EntityType>
+        <EntityType Name="Recipe">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Image" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Dish" Relationship="Self.FK_Dish_Recipe" FromRole="Recipe" ToRole="Dish" />
+          <NavigationProperty Name="Item_Recipe" Relationship="Self.FK_Item_Recipe_Recipe" FromRole="Recipe" ToRole="Item_Recipe" />
         </EntityType>
         <EntityType Name="Role">
           <Key>
@@ -230,6 +333,42 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Dish_Recipe">
+          <End Role="Recipe" Type="Self.Recipe" Multiplicity="1" />
+          <End Role="Dish" Type="Self.Dish" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Recipe">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Dish">
+              <PropertyRef Name="Recipe" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Item_Recipe_Item">
+          <End Role="Item" Type="Self.Item" Multiplicity="1" />
+          <End Role="Item_Recipe" Type="Self.Item_Recipe" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Item">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Item_Recipe">
+              <PropertyRef Name="Item" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Item_Recipe_Recipe">
+          <End Role="Recipe" Type="Self.Recipe" Multiplicity="1" />
+          <End Role="Item_Recipe" Type="Self.Item_Recipe" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Recipe">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Item_Recipe">
+              <PropertyRef Name="Recipe" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_User_Role">
           <End Role="Role" Type="Self.Role" Multiplicity="1" />
           <End Role="User" Type="Self.User" Multiplicity="*" />
@@ -245,7 +384,10 @@
         <EntityContainer Name="ShopPracticEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Authorization" EntityType="Self.Authorization" />
           <EntitySet Name="Buscket" EntityType="Self.Buscket" />
+          <EntitySet Name="Dish" EntityType="Self.Dish" />
           <EntitySet Name="Item" EntityType="Self.Item" />
+          <EntitySet Name="Item_Recipe" EntityType="Self.Item_Recipe" />
+          <EntitySet Name="Recipe" EntityType="Self.Recipe" />
           <EntitySet Name="Role" EntityType="Self.Role" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
           <EntitySet Name="User" EntityType="Self.User" />
@@ -261,6 +403,18 @@
             <End Role="User" EntitySet="User" />
             <End Role="Buscket" EntitySet="Buscket" />
           </AssociationSet>
+          <AssociationSet Name="FK_Dish_Recipe" Association="Self.FK_Dish_Recipe">
+            <End Role="Recipe" EntitySet="Recipe" />
+            <End Role="Dish" EntitySet="Dish" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Item_Recipe_Item" Association="Self.FK_Item_Recipe_Item">
+            <End Role="Item" EntitySet="Item" />
+            <End Role="Item_Recipe" EntitySet="Item_Recipe" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Item_Recipe_Recipe" Association="Self.FK_Item_Recipe_Recipe">
+            <End Role="Recipe" EntitySet="Recipe" />
+            <End Role="Item_Recipe" EntitySet="Item_Recipe" />
+          </AssociationSet>
           <AssociationSet Name="FK_User_Role" Association="Self.FK_User_Role">
             <End Role="Role" EntitySet="Role" />
             <End Role="User" EntitySet="User" />
@@ -271,7 +425,7 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="Хранилище ShopPracticModelContainer" CdmEntityContainer="ShopPracticEntities">
+        <EntityContainerMapping StorageEntityContainer="ShopPracticModelStoreContainer" CdmEntityContainer="ShopPracticEntities">
           <EntitySetMapping Name="Authorization">
             <EntityTypeMapping TypeName="ShopPracticModel.Authorization">
               <MappingFragment StoreEntitySet="Authorization">
@@ -291,6 +445,14 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Dish">
+            <EntityTypeMapping TypeName="ShopPracticModel.Dish">
+              <MappingFragment StoreEntitySet="Dish">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Recipe" ColumnName="Recipe" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Item">
             <EntityTypeMapping TypeName="ShopPracticModel.Item">
               <MappingFragment StoreEntitySet="Item">
@@ -299,6 +461,24 @@
                 <ScalarProperty Name="Cost" ColumnName="Cost" />
                 <ScalarProperty Name="Image" ColumnName="Image" />
                 <ScalarProperty Name="Count" ColumnName="Count" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Item_Recipe">
+            <EntityTypeMapping TypeName="ShopPracticModel.Item_Recipe">
+              <MappingFragment StoreEntitySet="Item_Recipe">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Item" ColumnName="Item" />
+                <ScalarProperty Name="Recipe" ColumnName="Recipe" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Recipe">
+            <EntityTypeMapping TypeName="ShopPracticModel.Recipe">
+              <MappingFragment StoreEntitySet="Recipe">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Image" ColumnName="Image" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -347,7 +527,7 @@
         <DesignerProperty Name="EnablePluralization" Value="false" />
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
         <DesignerProperty Name="UseLegacyProvider" Value="false" />
-        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
       </DesignerInfoPropertySet>
     </Options>
     <!-- Diagram content (shape and connector positions) -->
